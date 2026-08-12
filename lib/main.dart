@@ -103,8 +103,8 @@ class MembershipCardScreen extends StatelessWidget {
                       const SizedBox(height: 24),
                       Center(
                         child: Container(
-                          width: 148,
-                          height: 148,
+                          width: 154,
+                          height: 154,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
@@ -117,10 +117,14 @@ class MembershipCardScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: const Icon(
-                            Icons.person,
-                            size: 84,
-                            color: deepNavy,
+                          padding: const EdgeInsets.all(4),
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/sherwin_profile.jpg',
+                              fit: BoxFit.cover,
+                              width: 146,
+                              height: 146,
+                            ),
                           ),
                         ),
                       ),
