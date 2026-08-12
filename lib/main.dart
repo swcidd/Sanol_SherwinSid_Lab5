@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const Color imperialBlue = Color(0xFF00296B);
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
           onSurface: deepNavy,
         ),
         useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        primaryTextTheme: GoogleFonts.poppinsTextTheme(),
         scaffoldBackgroundColor: const Color(0xFFF8F9FA),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFFF8F9FA),
@@ -119,11 +123,30 @@ class MembershipCardScreen extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.all(4),
                           child: ClipOval(
-                            child: Image.asset(
-                              'assets/sherwin_profile.jpg',
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  'https://raw.githubusercontent.com/swcidd/Sanol_SherwinSid_Lab5/main/assets/sherwin_profile.jpg',
                               fit: BoxFit.cover,
                               width: 146,
                               height: 146,
+                              placeholder: (context, url) => Container(
+                                color: Colors.white,
+                                alignment: Alignment.center,
+                                child: const SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2.5,
+                                    color: deepNavy,
+                                  ),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => Image.asset(
+                                'assets/sherwin_profile.jpg',
+                                fit: BoxFit.cover,
+                                width: 146,
+                                height: 146,
+                              ),
                             ),
                           ),
                         ),
@@ -160,7 +183,7 @@ class MembershipCardScreen extends StatelessWidget {
                       const SizedBox(height: 12),
                       _InfoTile(
                         label: 'ID Number',
-                        value: '2026-0001',
+                        value: '25-1990-32',
                         icon: Icons.badge_outlined,
                       ),
                       const SizedBox(height: 12),
