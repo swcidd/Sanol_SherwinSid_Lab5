@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+const Color imperialBlue = Color(0xFF00296B);
+const Color frenchBlue = Color(0xFF003F88);
+const Color steelAzure = Color(0xFF00509D);
+const Color schoolBusYellow = Color(0xFFFDC500);
+const Color gold = Color(0xFFFFD500);
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,9 +20,34 @@ class MyApp extends StatelessWidget {
       title: 'Club Membership Card',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6D000F)),
+        colorScheme: ColorScheme.fromSeed(seedColor: imperialBlue).copyWith(
+          primary: schoolBusYellow,
+          secondary: frenchBlue,
+          tertiary: steelAzure,
+          surface: Colors.white,
+          onPrimary: imperialBlue,
+          onSecondary: gold,
+          onSurface: imperialBlue,
+        ),
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFFF5EFE8),
+        scaffoldBackgroundColor: const Color(0xFFF6F9FE),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: imperialBlue,
+          foregroundColor: Colors.white,
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: FilledButton.styleFrom(
+            backgroundColor: schoolBusYellow,
+            foregroundColor: imperialBlue,
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w700,
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
       ),
       home: const MembershipCardScreen(),
     );
@@ -45,7 +76,7 @@ class MembershipCardScreen extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 560),
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF6D000F),
+                    color: schoolBusYellow,
                     borderRadius: BorderRadius.circular(28),
                     boxShadow: const [
                       BoxShadow(
@@ -66,14 +97,14 @@ class MembershipCardScreen extends StatelessWidget {
                           width: 148,
                           height: 148,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.12),
+                            color: Colors.white.withOpacity(0.3),
                             shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 4),
+                            border: Border.all(color: imperialBlue, width: 4),
                           ),
                           child: const Icon(
                             Icons.person,
                             size: 84,
-                            color: Colors.white,
+                            color: imperialBlue,
                           ),
                         ),
                       ),
@@ -93,7 +124,7 @@ class MembershipCardScreen extends StatelessWidget {
                             Text(
                               'Student Organization Member',
                               style: theme.textTheme.bodyMedium?.copyWith(
-                                color: Colors.white70,
+                                color: Colors.white,
                               ),
                             ),
                           ],
@@ -121,7 +152,7 @@ class MembershipCardScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: FilledButton.icon(
-                          onPressed: null,
+                          onPressed: () {},
                           icon: const Icon(Icons.public),
                           label: const Text('Open Organization Page'),
                         ),
@@ -152,10 +183,10 @@ class _TopBar extends StatelessWidget {
           'Club Membership Card',
           style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w700,
-            color: const Color(0xFF6D000F),
+            color: Colors.white,
           ),
         ),
-        const Icon(Icons.card_membership, color: Color(0xFF6D000F)),
+        const Icon(Icons.card_membership, color: steelAzure),
       ],
     );
   }
@@ -184,14 +215,14 @@ class _CardHeader extends StatelessWidget {
             SizedBox(height: 4),
             Text(
               'Student Affairs Office',
-              style: TextStyle(color: Colors.white70, fontSize: 13),
+              style: TextStyle(color: Colors.white, fontSize: 13),
             ),
           ],
         ),
         const CircleAvatar(
           radius: 22,
-          backgroundColor: Colors.white,
-          child: Icon(Icons.school, color: Color(0xFF6D000F)),
+          backgroundColor: imperialBlue,
+          child: Icon(Icons.school, color: schoolBusYellow),
         ),
       ],
     );
@@ -214,13 +245,13 @@ class _InfoTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.12),
+        color: Colors.white.withOpacity(0.6),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: Colors.white.withOpacity(0.12)),
+        border: Border.all(color: imperialBlue.withOpacity(0.18)),
       ),
       child: Row(
         children: [
-          Icon(icon, color: Colors.white, size: 22),
+          Icon(icon, color: imperialBlue, size: 22),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -229,7 +260,7 @@ class _InfoTile extends StatelessWidget {
                 Text(
                   label,
                   style: const TextStyle(
-                    color: Colors.white70,
+                    color: Colors.white,
                     fontSize: 12,
                   ),
                 ),
