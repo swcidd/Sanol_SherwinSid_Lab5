@@ -156,7 +156,7 @@ class MembershipCardScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              'MEMBER NAME',
+                              'Sanol, Sherwin Sid S.',
                               style: theme.textTheme.titleLarge?.copyWith(
                                 color: deepNavy,
                                 letterSpacing: 1.1,
@@ -165,7 +165,7 @@ class MembershipCardScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              'Student Organization Member',
+                              'Software Engineering Student',
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: deepNavy.withOpacity(0.9),
                                 fontWeight: FontWeight.w600,
@@ -177,7 +177,7 @@ class MembershipCardScreen extends StatelessWidget {
                       const SizedBox(height: 24),
                       _InfoTile(
                         label: 'Organization',
-                        value: 'CPU Student Organization',
+                        value: 'Philippine Society of Software Engineers',
                         icon: Icons.groups_2_outlined,
                       ),
                       const SizedBox(height: 12),
@@ -298,12 +298,14 @@ class _InfoTile extends StatelessWidget {
   const _InfoTile({
     required this.label,
     required this.value,
-    required this.icon,
+    this.icon,
+    this.assetIcon,
   });
 
   final String label;
   final String value;
-  final IconData icon;
+  final IconData? icon;
+  final String? assetIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -330,7 +332,15 @@ class _InfoTile extends StatelessWidget {
               color: schoolBusYellow.withOpacity(0.25),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(icon, color: deepNavy, size: 22),
+            child: assetIcon != null
+                ? Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Image.asset(
+                      assetIcon!,
+                      fit: BoxFit.contain,
+                    ),
+                  )
+                : Icon(icon, color: deepNavy, size: 22),
           ),
           const SizedBox(width: 12),
           Expanded(

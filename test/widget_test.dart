@@ -17,7 +17,7 @@ void main() {
 
     expect(find.text('Club Membership Card'), findsOneWidget);
     expect(find.text('CPU'), findsOneWidget);
-    expect(find.text('MEMBER NAME'), findsOneWidget);
+    expect(find.text('Sanol, Sherwin Sid S.'), findsOneWidget);
     expect(find.text('Open Organization Page'), findsOneWidget);
   });
 }
