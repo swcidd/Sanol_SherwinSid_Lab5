@@ -125,7 +125,7 @@ class MembershipCardScreen extends StatelessWidget {
                           child: ClipOval(
                             child: CachedNetworkImage(
                               imageUrl:
-                                  'https://raw.githubusercontent.com/swcidd/Sanol_SherwinSid_Lab5/main/assets/sherwin_profile.jpg',
+                                  'https://media.licdn.com/dms/image/v2/D4D03AQEcdkhMhIg1jQ/profile-displayphoto-crop_800_800/B4DZ_hQbrMGwAI-/0/1786190613026?e=1788393600&v=beta&t=a4CCTpCmcfbMMv6k4Gr0h7_y2Hhif6wWP8CPHk_AH_o',
                               fit: BoxFit.cover,
                               width: 146,
                               height: 146,
@@ -141,11 +141,14 @@ class MembershipCardScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              errorWidget: (context, url, error) => Image.asset(
-                                'assets/sherwin_profile.jpg',
-                                fit: BoxFit.cover,
-                                width: 146,
-                                height: 146,
+                              errorWidget: (context, url, error) => Container(
+                                color: Colors.white,
+                                alignment: Alignment.center,
+                                child: const Icon(
+                                  Icons.person_off,
+                                  size: 48,
+                                  color: deepNavy,
+                                ),
                               ),
                             ),
                           ),
