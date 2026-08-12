@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const Color imperialBlue = Color(0xFF00296B);
 const Color frenchBlue = Color(0xFF003F88);
 const Color steelAzure = Color(0xFF00509D);
 const Color schoolBusYellow = Color(0xFFFDC500);
 const Color gold = Color(0xFFFFD500);
+const Color deepNavy = Color(0xFF0A2540);
 
 void main() {
   runApp(const MyApp());
@@ -25,28 +27,15 @@ class MyApp extends StatelessWidget {
           secondary: frenchBlue,
           tertiary: steelAzure,
           surface: Colors.white,
-          onPrimary: imperialBlue,
-          onSecondary: gold,
-          onSurface: imperialBlue,
+          onPrimary: deepNavy,
+          onSecondary: deepNavy,
+          onSurface: deepNavy,
         ),
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFFF6F9FE),
+        scaffoldBackgroundColor: const Color(0xFFF8F9FA),
         appBarTheme: const AppBarTheme(
-          backgroundColor: imperialBlue,
-          foregroundColor: Colors.white,
-        ),
-        filledButtonTheme: FilledButtonThemeData(
-          style: FilledButton.styleFrom(
-            backgroundColor: schoolBusYellow,
-            foregroundColor: imperialBlue,
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.w700,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
+          backgroundColor: Color(0xFFF8F9FA),
+          foregroundColor: deepNavy,
         ),
       ),
       home: const MembershipCardScreen(),
@@ -56,6 +45,13 @@ class MyApp extends StatelessWidget {
 
 class MembershipCardScreen extends StatelessWidget {
   const MembershipCardScreen({super.key});
+
+  Future<void> _openOrganizationPage() async {
+    final uri = Uri.parse('https://cpu.edu.ph/');
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $uri');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +74,12 @@ class MembershipCardScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: schoolBusYellow,
                     borderRadius: BorderRadius.circular(28),
+                    border: Border.all(color: deepNavy.withOpacity(0.2)),
                     boxShadow: const [
                       BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 18,
-                        offset: Offset(0, 10),
+                        color: Colors.black12,
+                        blurRadius: 20,
+                        offset: Offset(0, 12),
                       ),
                     ],
                   ),
@@ -90,21 +87,40 @@ class MembershipCardScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const _CardHeader(),
-                      const SizedBox(height: 28),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 18,
+                          vertical: 16,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: deepNavy.withOpacity(0.14)),
+                        ),
+                        child: const _CardHeader(),
+                      ),
+                      const SizedBox(height: 24),
                       Center(
                         child: Container(
                           width: 148,
                           height: 148,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.3),
+                            color: Colors.white,
                             shape: BoxShape.circle,
-                            border: Border.all(color: imperialBlue, width: 4),
+                            border: Border.all(color: deepNavy, width: 4),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 12,
+                                offset: Offset(0, 6),
+                              ),
+                            ],
                           ),
                           child: const Icon(
                             Icons.person,
                             size: 84,
-                            color: imperialBlue,
+                            color: deepNavy,
                           ),
                         ),
                       ),
@@ -115,16 +131,17 @@ class MembershipCardScreen extends StatelessWidget {
                             Text(
                               'MEMBER NAME',
                               style: theme.textTheme.titleLarge?.copyWith(
-                                color: Colors.white,
-                                letterSpacing: 1.2,
-                                fontWeight: FontWeight.w700,
+                                color: deepNavy,
+                                letterSpacing: 1.1,
+                                fontWeight: FontWeight.w800,
                               ),
                             ),
                             const SizedBox(height: 6),
                             Text(
                               'Student Organization Member',
                               style: theme.textTheme.bodyMedium?.copyWith(
-                                color: Colors.white,
+                                color: deepNavy.withOpacity(0.9),
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
@@ -151,10 +168,27 @@ class MembershipCardScreen extends StatelessWidget {
                       const SizedBox(height: 24),
                       SizedBox(
                         width: double.infinity,
-                        child: FilledButton.icon(
-                          onPressed: () {},
+                        child: OutlinedButton.icon(
+                          onPressed: _openOrganizationPage,
                           icon: const Icon(Icons.public),
                           label: const Text('Open Organization Page'),
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: deepNavy,
+                            side: const BorderSide(color: deepNavy, width: 2.2),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 20,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.w800,
+                            ),
+                            elevation: 3,
+                            shadowColor: Colors.black26,
+                          ),
                         ),
                       ),
                     ],
@@ -183,10 +217,10 @@ class _TopBar extends StatelessWidget {
           'Club Membership Card',
           style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: deepNavy,
           ),
         ),
-        const Icon(Icons.card_membership, color: steelAzure),
+        const Icon(Icons.card_membership, color: deepNavy),
       ],
     );
   }
@@ -206,7 +240,7 @@ class _CardHeader extends StatelessWidget {
             Text(
               'CPU',
               style: TextStyle(
-                color: Colors.white,
+                color: deepNavy,
                 fontSize: 18,
                 fontWeight: FontWeight.w800,
                 letterSpacing: 2,
@@ -215,14 +249,18 @@ class _CardHeader extends StatelessWidget {
             SizedBox(height: 4),
             Text(
               'Student Affairs Office',
-              style: TextStyle(color: Colors.white, fontSize: 13),
+              style: TextStyle(
+                color: deepNavy,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
         const CircleAvatar(
           radius: 22,
-          backgroundColor: imperialBlue,
-          child: Icon(Icons.school, color: schoolBusYellow),
+          backgroundColor: schoolBusYellow,
+          child: Icon(Icons.school, color: deepNavy),
         ),
       ],
     );
@@ -243,15 +281,30 @@ class _InfoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.6),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: imperialBlue.withOpacity(0.18)),
+        border: Border.all(color: deepNavy.withOpacity(0.14)),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
-          Icon(icon, color: imperialBlue, size: 22),
+          Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: schoolBusYellow.withOpacity(0.25),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: deepNavy, size: 22),
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -259,18 +312,20 @@ class _InfoTile extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: deepNavy.withOpacity(0.82),
                     fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.3,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   value,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: deepNavy,
                     fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ],
